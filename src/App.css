@@ -1,11 +1,6 @@
 body {
   text-align: center;
-  background: linear-gradient(
-    90deg,
-    rgba(42, 123, 155, 1) 0%,
-    rgba(65, 83, 130, 1) 62%,
-    rgba(237, 221, 83, 1) 100%
-  );
+  background: #b8d5d0;
 }
 
 h1 {
@@ -13,17 +8,15 @@ h1 {
   color: #dbedf3;
   font-family: "Arvo", cursive;
   text-shadow: 3px 0 #da0463;
-  background: linear-gradient(
-    90deg,
-    rgba(79, 150, 179, 1) 0%,
-    rgba(65, 83, 130, 1) 68%,
-    rgba(237, 221, 83, 1) 100%
-  );
+  background: #ffffff;
 }
 
 footer {
-  color: #dbedf3;
+  color: #333333;
   font-family: sans-serif;
+  background: #d5d5d5;
+  padding: 10px;
+  margin-top: 20px;
 }
 
 .set {

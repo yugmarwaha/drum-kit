@@ -103,7 +103,6 @@ function App() {
           />
         ))}
       </div>
-      <footer>Made with ❤️ using React.</footer>
     </main>
   );
 }
