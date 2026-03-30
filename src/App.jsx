@@ -4,13 +4,13 @@ import "./App.css";
 
 // Drum data configuration
 const DRUMS = Object.freeze([
-  { key: "w", sound: "/sounds/tom-1.mp3", label: "Tom 1" },
-  { key: "a", sound: "/sounds/tom-2.mp3", label: "Tom 2" },
-  { key: "s", sound: "/sounds/tom-3.mp3", label: "Tom 3" },
-  { key: "d", sound: "/sounds/tom-4.mp3", label: "Tom 4" },
-  { key: "j", sound: "/sounds/snare.mp3", label: "Snare" },
-  { key: "k", sound: "/sounds/crash.mp3", label: "Crash" },
-  { key: "l", sound: "/sounds/kick-bass.mp3", label: "Kick Bass" },
+  { key: "w", sound: "/sounds/tom-1.mp3", label: "Tom 1", type: "tom" },
+  { key: "a", sound: "/sounds/tom-2.mp3", label: "Tom 2", type: "tom" },
+  { key: "s", sound: "/sounds/tom-3.mp3", label: "Tom 3", type: "tom" },
+  { key: "d", sound: "/sounds/tom-4.mp3", label: "Tom 4", type: "tom" },
+  { key: "j", sound: "/sounds/snare.mp3", label: "Snare", type: "snare" },
+  { key: "k", sound: "/sounds/crash.mp3", label: "Crash", type: "crash" },
+  { key: "l", sound: "/sounds/kick-bass.mp3", label: "Kick Bass", type: "kick" },
 ]);
 
 // Create a map for O(1) lookup
@@ -66,7 +66,7 @@ function App() {
     audio.play();
 
     setPressedKey(key);
-    setTimeout(() => setPressedKey(null), 100);
+    setTimeout(() => setPressedKey(null), 150);
   }, []);
 
   // Handle keyboard events
@@ -108,8 +108,14 @@ function App() {
         ))}
       </div>
       <p className="footer-hint">
-        <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>J</kbd>{" "}
-        <kbd>K</kbd> <kbd>L</kbd>
+        {DRUMS.map((drum) => (
+          <kbd
+            key={drum.key}
+            className={pressedKey === drum.key ? "active" : ""}
+          >
+            {drum.key.toUpperCase()}
+          </kbd>
+        ))}
       </p>
     </main>
   );
