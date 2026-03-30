@@ -40,7 +40,8 @@ const DrumButton = memo(function DrumButton({
       aria-label={`Play ${label} drum`}
       aria-pressed={isPressed}
     >
-      {drumKey}
+      <span className="key">{drumKey}</span>
+      <span className="label">{label}</span>
     </button>
   );
 });
@@ -91,7 +92,10 @@ function App() {
 
   return (
     <main>
-      <h1 id="title">Drum 🥁 Kit</h1>
+      <h1 id="title">
+        Drum <span className="emoji">🥁</span> Kit
+      </h1>
+      <p className="subtitle">Press a key or click to play</p>
       <div className="set" role="group" aria-label="Drum kit buttons">
         {DRUMS.map((drum) => (
           <DrumButton
@@ -103,6 +107,10 @@ function App() {
           />
         ))}
       </div>
+      <p className="footer-hint">
+        <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> <kbd>J</kbd>{" "}
+        <kbd>K</kbd> <kbd>L</kbd>
+      </p>
     </main>
   );
 }

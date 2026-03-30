@@ -1,47 +1,156 @@
+/* Reset & Base */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  text-align: center;
-  background: #b8d5d0;
+  min-height: 100vh;
+  background: linear-gradient(145deg, #0f0c29, #1a1a2e, #16213e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Arvo", serif;
+  overflow: hidden;
 }
 
-h1 {
-  font-size: 5rem;
-  color: #dbedf3;
-  font-family: "Arvo", cursive;
-  text-shadow: 3px 0 #da0463;
-  background: #ffffff;
+#root {
+  width: 100%;
 }
 
-footer {
-  color: #333333;
-  font-family: sans-serif;
-  background: #d5d5d5;
-  padding: 10px;
-  margin-top: 20px;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
 }
 
-.set {
-  margin: 10% auto;
+/* Title */
+h1#title {
+  font-size: clamp(2rem, 6vw, 4rem);
+  color: #fff;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  background: none;
+  text-shadow: none;
+  position: relative;
 }
 
-.drum {
-  outline: none;
-  border: 10px solid #41b6b6;
-  font-size: 5rem;
-  font-family: "Arvo", cursive;
-  line-height: 2;
-  font-weight: 900;
-  color: #da0463;
-  text-shadow: 3px 0 #dbedf3;
-  border-radius: 15px;
+h1#title .emoji {
   display: inline-block;
-  width: 150px;
-  height: 150px;
-  text-align: center;
-  margin: 10px;
-  background-color: white;
-  cursor: pointer;
+  filter: drop-shadow(0 0 12px rgba(255, 107, 107, 0.5));
 }
 
+.subtitle {
+  color: rgba(255, 255, 255, 0.4);
+  font-family: "Arvo", serif;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+}
+
+/* Drum Grid */
+.set {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  max-width: 700px;
+  width: 100%;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+/* Drum Button */
+.drum {
+  position: relative;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center 35%;
+  background-color: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.1s ease, box-shadow 0.1s ease,
+    background-color 0.1s ease, border-color 0.15s ease;
+  overflow: hidden;
+}
+
+.drum::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.drum:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.drum:active,
+.drum.pressed {
+  transform: scale(0.93);
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 30px rgba(255, 107, 107, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* Key badge */
+.drum .key {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-family: "Arvo", serif;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+/* Label */
+.drum .label {
+  position: absolute;
+  bottom: 12px;
+  font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Arvo", serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Individual drum backgrounds */
 .w {
   background-image: url(/images/tom1.png);
 }
@@ -64,7 +173,54 @@ footer {
   background-image: url(/images/kick.png);
 }
 
-.pressed {
-  box-shadow: 0 3px 4px 0 #dbedf3;
-  opacity: 0.5;
+/* Bottom row centering (3 items in a 4-col grid) */
+.set .drum:nth-child(5) {
+  grid-column: 1 / 2;
+}
+
+/* Footer hint */
+.footer-hint {
+  margin-top: 3rem;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.8rem;
+  font-family: "Arvo", serif;
+  letter-spacing: 0.15em;
+}
+
+.footer-hint kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 0 2px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-family: "Arvo", serif;
+  font-size: 0.75rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .set {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .set .drum:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .drum .key {
+    width: 24px;
+    height: 24px;
+    top: 6px;
+    right: 6px;
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .set {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
 }
